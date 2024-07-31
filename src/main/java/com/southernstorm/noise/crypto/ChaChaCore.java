@@ -22,6 +22,9 @@
 
 package com.southernstorm.noise.crypto;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
 /**
  * Implementation of the ChaCha20 core hash transformation.
  */
