@@ -75,6 +75,19 @@ public final class ChaChaCore {
 		return (key[offset] & 0xFF) | ((key[offset + 1] & 0xFF) << 8) | ((key[offset + 2] & 0xFF) << 16) | ((key[offset + 3] & 0xFF) << 24);
 	}
 
+	private static int toLittleEndian(int n)
+	{
+		ByteBuffer buffer = ByteBuffer.allocate(4);
+
+		buffer.order(ByteOrder.BIG_ENDIAN);
+		buffer.putInt(n);
+
+		buffer.order(ByteOrder.LITTLE_ENDIAN);
+		buffer.rewind();
+
+		return buffer.getInt();
+	}
+
 	/**
 	 * Initializes a ChaCha20 block with a 128-bit key.
 	 * 
@@ -145,8 +158,8 @@ public final class ChaChaCore {
 	{
 		output[12] = 0;
 		output[13] = 0;
-		output[14] = (int)iv;
-		output[15] = (int)(iv >> 32);
+		output[14] = toLittleEndian((int) (iv >> 32));
+		output[15] = toLittleEndian((int) (iv & 0xFFFFFFFFL));
 	}
 	
 	/**
@@ -162,8 +175,8 @@ public final class ChaChaCore {
 	{
 		output[12] = (int)counter;
 		output[13] = (int)(counter >> 32);
-		output[14] = (int)iv;
-		output[15] = (int)(iv >> 32);
+		output[14] = toLittleEndian((int) (iv >> 32));
+		output[15] = toLittleEndian((int) (iv & 0xFFFFFFFFL));
 	}
 	
 	private static int leftRotate16(int v)
