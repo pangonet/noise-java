@@ -4,3 +4,4 @@ target
 .project
 doc
 *.class
+.DS_Store
