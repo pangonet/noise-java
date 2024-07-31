@@ -287,4 +287,9 @@ class ChaChaPolyCipherState implements CipherState {
 	public void setNonce(long nonce) {
 		n = nonce;
 	}
+
+	@Override
+	public long getNonce() {
+		return n;
+	}
 }

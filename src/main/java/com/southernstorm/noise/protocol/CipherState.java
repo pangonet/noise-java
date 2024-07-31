@@ -159,4 +159,14 @@ public interface CipherState extends Destroyable {
 	 * value goes backwards then security may be compromised.
 	 */
 	void setNonce(long nonce);
+
+	/**
+	 * Returns the nonce value.
+	 *
+	 * @return The current nonce value
+	 *
+	 * This function is intended for testing purposes only.  If the nonce
+	 * value goes backwards then security may be compromised.
+	 */
+	long getNonce();
 }
